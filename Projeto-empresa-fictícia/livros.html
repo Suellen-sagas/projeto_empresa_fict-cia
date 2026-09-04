@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Livros | BookSpace</title>
+
+    <link rel="stylesheet" href="livros.css">
+
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="header">
+
+        <div class="logo">
+            Book<span>Space</span>
+        </div>
+
+        <!-- nav bar -->
+        <nav>
+
+            <a href="livros.html" class="ativo">
+                Catálogo
+            </a>
+
+            <a href="carrinho.html" class="carrinho-link">
+            
+                <span>Carrinho</span>
+            </a>
+
+            <a href="alugueis.html">
+                Meus Aluguéis
+            </a>
+
+             <a href="conta.html">
+                Minha Conta
+            </a>
+            
+        </nav>
+
+    </header>
+
+
+    <!-- Conteúdo principal -->
+    <main class="container">
+
+        <!-- Título -->
+        <div class="titulo">
+
+            <h1>Catálogo de livros</h1>
+
+            <p>
+                Encontre seu próximo livro para comprar ou alugar.
+            </p>
+
+        </div>
+
+
+        <!-- Pesquisa -->
+        <div class="pesquisa">
+
+            <input type="text" placeholder="Pesquisar por título ou autor...">
+
+            <button>
+                Pesquisar
+            </button>
+
+        </div>
+
+
+        <!-- Área de catálogo -->
+        <div class="catalogo">
+
+            <!-- Filtros -->
+            <aside class="filtros">
+
+                <h2>Filtros</h2>
+
+                <label for="genero">
+                    Gênero
+                </label>
+
+                <select id="genero">
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    <option value="romance">
+                        Romance
+                    </option>
+
+                    <option value="ficcao">
+                        Ficção
+                    </option>
+
+                    <option value="fantasia">
+                        Fantasia
+                    </option>
+
+                    <option value="terror">
+                        Terror
+                    </option>
+
+                </select>
+
+
+                <label for="tipo">
+                    Disponibilidade
+                </label>
+
+                <select id="tipo">
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    <option value="compra">
+                        Comprar
+                    </option>
+
+                    <option value="aluguel">
+                        Alugar
+                    </option>
+
+                </select>
+
+            </aside>
+
+
+            <!-- Livros -->
+            <section class="livros">
+
+
+                <!-- Livro 1 -->
+                <div class="livro-card">
+
+                    <img src="imagens/621237c19196d76f9844a268ddf634e4.webp" alt="Capa do livro">
+
+                    <div class="livro-info">
+
+                        <h2>
+                            É Assim que Acaba
+                        </h2>
+
+                        <p class="autor">
+                            Colleen Hoover
+                        </p>
+
+                        <p class="preco">
+                            Compra:
+                            <strong>R$ 39,90</strong>
+                        </p>
+
+                        <p class="aluguel">
+                            Aluguel:
+                            <strong>R$ 8,90</strong>
+                        </p>
+
+                        <a href="livro.html" class="detalhes">
+                            Ver detalhes
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Livro 2 -->
+                <div class="livro-card">
+
+                    <img src="img/livro2.jpg" alt="Capa do livro">
+
+                    <div class="livro-info">
+
+                        <h2>
+                            O Hobbit
+                        </h2>
+
+                        <p class="autor">
+                            J. R. R. Tolkien
+                        </p>
+
+                        <p class="preco">
+                            Compra:
+                            <strong>R$ 45,90</strong>
+                        </p>
+
+                        <p class="aluguel">
+                            Aluguel:
+                            <strong>R$ 9,90</strong>
+                        </p>
+
+                        <a href="livro.html" class="detalhes">
+                            Ver detalhes
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Livro 3 -->
+                <div class="livro-card">
+
+                    <img src="img/livro3.jpg" alt="Capa do livro">
+
+                    <div class="livro-info">
+
+                        <h2>
+                            Harry Potter
+                        </h2>
+
+                        <p class="autor">
+                            J. K. Rowling
+                        </p>
+
+                        <p class="preco">
+                            Compra:
+                            <strong>R$ 49,90</strong>
+                        </p>
+
+                        <p class="aluguel">
+                            Aluguel:
+                            <strong>R$ 10,90</strong>
+                        </p>
+
+                        <a href="livro.html" class="detalhes">
+                            Ver detalhes
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Livro 4 -->
+                <div class="livro-card">
+
+                    <img src="img/livro4.jpg" alt="Capa do livro">
+
+                    <div class="livro-info">
+
+                        <h2>
+                            O Pequeno Príncipe
+                        </h2>
+
+                        <p class="autor">
+                            Antoine de Saint-Exupéry
+                        </p>
+
+                        <p class="preco">
+                            Compra:
+                            <strong>R$ 29,90</strong>
+                        </p>
+
+                        <p class="aluguel">
+                            Aluguel:
+                            <strong>R$ 6,90</strong>
+                        </p>
+
+                        <a href="livro.html" class="detalhes">
+                            Ver detalhes
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

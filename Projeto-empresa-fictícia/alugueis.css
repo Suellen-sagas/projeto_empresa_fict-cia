@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F5E8D3;
+    color: #2C3E50;
+}
+
+/* Cabeçalho */
+
+.header {
+    background-color: #1D2E45;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #B15E41;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #F5E8D3;
+}
+
+.logo span {
+    color: #D1A077;
+}
+
+.header nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.header nav a {
+    text-decoration: none;
+    color: #D1A077;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.header nav a:hover {
+    color: #F5E8D3;
+}
+
+.header nav .ativo {
+    color: #F5E8D3;
+    font-weight: bold;
+}
+
+/* Carrinho */
+
+.carrinho-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D1A077;
+}
+
+.carrinho-link:hover {
+    color: #F5E8D3;
+}
+
+.carrinho-link svg {
+    display: block;
+}
+
+/* Botão sair */
+
+.sair {
+    background-color: #B15E41;
+    color: #F5E8D3 !important;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.sair:hover {
+    background-color: #2C3E50 !important;
+}
+
+/* Conteúdo */
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+/* Título */
+
+.titulo {
+    margin-bottom: 30px;
+    font-family: garamound, serif;
+}
+
+.titulo h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+    color: #1D2E45;
+}
+
+.titulo p {
+    color: #2C3E50;
+}
+
+/* Lista de aluguéis */
+
+.alugueis {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Card */
+
+.aluguel-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border-left: 5px solid #D1A077;
+    box-shadow: 0 2px 10px rgba(29, 46, 69, 0.12);
+    transition: 0.3s;
+}
+
+.aluguel-card:hover {
+    transform: translateY(-2px);
+    border-left-color: #B15E41;
+    box-shadow: 0 4px 14px rgba(29, 46, 69, 0.18);
+}
+
+/* Capa */
+
+.aluguel-card img {
+    width: 90px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Informações */
+
+.aluguel-info {
+    flex: 1;
+}
+
+.aluguel-info h2 {
+    font-size: 19px;
+    margin-bottom: 6px;
+    color: #1D2E45;
+}
+
+.autor {
+    color: #2C3E50;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+/* Dados */
+
+.dados p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 7px;
+}
+
+.dados strong {
+    color: #2C3E50;
+}
+
+/* Status */
+
+.status {
+    width: 180px;
+    text-align: center;
+}
+
+.status span {
+    display: inline-block;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status p {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #666;
+}
+
+/* Status ativo */
+
+.status-ativo {
+    background-color: #D1A077;
+    color: #1D2E45;
+}
+
+/* Próximo do vencimento */
+
+.status-atencao {
+    background-color: #B15E41;
+    color: #F5E8D3;
+}
+
+/* Finalizado */
+
+.status-finalizado {
+    background-color: #2C3E50;
+    color: #F5E8D3;
+}
+
+/* Aluguel finalizado */
+
+.finalizado {
+    opacity: 0.75;
+}
+
+/* Responsividade */
+
+@media (max-width: 800px) {
+
+    .header {
+        padding: 20px;
+    }
+
+    .aluguel-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .status {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .header nav {
+        gap: 12px;
+    }
+
+    .header nav a {
+        font-size: 13px;
+    }
+
+    .aluguel-card {
+        flex-direction: column;
+    }
+
+    .aluguel-card img {
+        width: 100px;
+        height: 135px;
+    }
+
+    .status {
+        width: 100%;
+    }
+}

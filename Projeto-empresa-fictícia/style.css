@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5e8d3;
+  color: #2c3e50;
+}
+
+/* Container principal */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Caixa de login */
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  border-top: 5px solid #b15e41;
+  box-shadow: 0 4px 20px rgba(29, 46, 69, 0.15);
+}
+
+/* Título */
+
+.login-box h1 {
+  text-align: center;
+  font-size: 30px;
+  color: #1d2e45;
+  margin-bottom: 8px;
+}
+
+/* Subtítulo */
+
+.subtitle {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+/* Campos */
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.input-group input {
+  padding: 13px;
+  border: 1px solid #d1a077;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+  color: #2c3e50;
+  background-color: #ffffff;
+}
+
+.input-group input:focus {
+  border-color: #b15e41;
+  box-shadow: 0 0 0 2px rgba(177, 94, 65, 0.12);
+}
+
+/* Opções */
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  font-size: 13px;
+}
+
+.options label {
+  color: #666;
+}
+
+.options a {
+  color: #b15e41;
+  text-decoration: none;
+}
+
+.options a:hover {
+  color: #1d2e45;
+  text-decoration: underline;
+}
+
+/* Botão */
+
+.botao-entrar {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 6px;
+  background-color: #b15e41;
+  color: #f5e8d3;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botao-entrar:hover {
+  background-color: #1d2e45;
+}
+
+/* Criar conta */
+
+.register {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 14px;
+  color: #666;
+}
+
+.register a {
+  color: #b15e41;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.register a:hover {
+  color: #1d2e45;
+  text-decoration: underline;
+}
+
+/* Responsividade */
+
+@media (max-width: 450px) {
+  .login-box {
+    padding: 30px 20px;
+  }
+
+  .options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+.login-container {
+    flex-direction: column;
+}
+
+.logo-login {
+    width: 220px;
+    height: auto;
+    margin-bottom: 15px;
+}
