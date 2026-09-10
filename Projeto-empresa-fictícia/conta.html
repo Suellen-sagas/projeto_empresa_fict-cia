@@ -1,94 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Minha conta | BookSpace</title>
-
     <link rel="stylesheet" href="conta.css">
 </head>
-
 <body>
-
-    <!-- Cabeçalho -->
     <header class="header">
-
-        <div class="logo">
-            Book<span>Space</span>
-        </div>
-
+        <a href="livros.html" class="logo">Book<span>Space</span></a>
         <nav>
-
-            <a href="index.html">
-                Início
-            </a>
-
-            <a href="livros.html">
-                Livros
-            </a>
-
-            <a href="carrinho.html" class="carrinho-link">
-                Carrinho
-            </a>
-
-            <a href="conta.html" class="ativo">
-                Minha conta
-            </a>
-
-            <a href="index.html" class="sair">
-                Sair
-            </a>
-
+            <a href="livros.html">Livros</a>
+            <a href="alugueis.html">Meus aluguéis</a>
+            <a href="conta.html">Minha conta</a>
+            <a href="carrinho.html">Carrinho</a>
+            <a href="index.html" class="sair">Sair</a>
         </nav>
-
     </header>
 
-
-    <!-- Conteúdo principal -->
     <main class="container">
-
-        <div class="titulo">
-
-            <h1>
-                Minha conta
-            </h1>
-
-            <p>
-                Gerencie seus dados, pedidos e aluguéis.
-            </p>
-
-        </div>
-
-
-        <!-- Informações do usuário -->
-        <section class="perfil">
-
-            <div>
-
-                <h2>
-                    Ana Julia
-                </h2>
-
-                <p>
-                    ana@email.com
-                </p>
-
-            </div>
-
+        <section class="titulo">
+            <h1>Minha conta</h1>
+            <p>Confira e atualize seus dados.</p>
         </section>
 
+        <section class="perfil">
+            <div class="avatar">S</div>
 
-        <!-- Opções da conta -->
-        <section class="opcoes">
+            <form action="conta.html" class="form-perfil">
+                <div class="campo">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" id="nome" value="Suellen Sagas">
+                </div>
 
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" value="suellen@email.com">
+                </div>
 
-            <!-- Meus dados -->
-            <a href="#" class="opcao">
+                <div class="campo">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" value="(48) 99999-9999">
+                </div>
 
-                <div>
+                <div class="campo">
+                    <label for="senha">Nova senha</label>
+                    <input type="password" id="senha" placeholder="Deixe em branco para não alterar">
+                </div>
 
-                    <h3>
-                        Meus dados
-                    </h3
+                <button type="submit">Salvar alterações</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

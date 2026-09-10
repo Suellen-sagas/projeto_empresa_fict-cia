@@ -10,54 +10,55 @@ body {
     color: #2C3E50;
 }
 
-.login-container {
+.cadastro-container {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 30px 20px;
 }
 
-.logo-login {
-    width: 220px;
-    max-width: 80%;
-    margin-bottom: 20px;
-}
-
-.login-box {
+.cadastro-box {
     width: 100%;
-    max-width: 430px;
-    background-color: #ffffff;
+    max-width: 480px;
+    background-color: white;
     padding: 35px;
     border-radius: 10px;
     border-top: 5px solid #B15E41;
     box-shadow: 0 4px 18px rgba(29, 46, 69, 0.15);
 }
 
-.login-box h1 {
-    color: #1D2E45;
-    font-size: 30px;
+.header-cadastro {
     text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo-cadastro {
+    width: 180px;
+    margin-bottom: 12px;
+}
+
+.header-cadastro h1 {
+    color: #1D2E45;
+    font-size: 28px;
     margin-bottom: 8px;
 }
 
-.subtitle {
-    text-align: center;
+.header-cadastro p {
     color: #666;
-    margin-bottom: 28px;
+    font-size: 14px;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .input-group label {
     margin-bottom: 7px;
-    font-weight: bold;
     font-size: 14px;
+    font-weight: bold;
 }
 
 .input-group input {
@@ -72,22 +73,15 @@ body {
     border-color: #B15E41;
 }
 
-.options {
+.termos {
     display: flex;
-    justify-content: space-between;
-    gap: 15px;
+    align-items: center;
+    gap: 8px;
     font-size: 13px;
     margin-bottom: 20px;
 }
 
-.options a,
-.register a {
-    color: #B15E41;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.botao-entrar {
+button {
     width: 100%;
     padding: 13px;
     border: none;
@@ -99,22 +93,18 @@ body {
     cursor: pointer;
 }
 
-.botao-entrar:hover {
+button:hover {
     background-color: #1D2E45;
 }
 
-.register {
+.login-link {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
 }
 
-@media (max-width: 500px) {
-    .login-box {
-        padding: 25px;
-    }
-
-    .options {
-        flex-direction: column;
-    }
+.login-link a {
+    color: #B15E41;
+    text-decoration: none;
+    font-weight: bold;
 }

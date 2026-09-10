@@ -1,36 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Meus aluguéis | BookSpace</title>
-
     <link rel="stylesheet" href="alugueis.css">
-
-    
 </head>
-
 <body>
-
-    <!-- Cabeçalho -->
     <header class="header">
-
-        <div class="logo">
-            Book<span>Space</span>
-        </div>
-
+        <a href="livros.html" class="logo">Book<span>Space</span></a>
         <nav>
-<button>
-      <a href="index.html">
-                Início
-            </a>
-</button>
-          
+            <a href="livros.html">Livros</a>
+            <a href="alugueis.html">Meus aluguéis</a>
+            <a href="conta.html">Minha conta</a>
+            <a href="carrinho.html">Carrinho</a>
+            <a href="index.html" class="sair">Sair</a>
+        </nav>
+    </header>
 
-            <a href="livros.html">
-                Livros
-            </a>
+    <main class="container">
+        <section class="titulo">
+            <h1>Meus aluguéis</h1>
+            <p>Acompanhe os livros que estão com você.</p>
+        </section>
 
-     
+        <section class="alugueis">
+            <article class="aluguel-card">
+                <img src="imagens/livro1.jpg" alt="Capa do livro É Assim que Acaba">
+                <div class="aluguel-info">
+                    <h2>É Assim que Acaba</h2>
+                    <p class="autor">Colleen Hoover</p>
+                    <div class="dados">
+                        <p><strong>Retirada:</strong> 10/09/2026</p>
+                        <p><strong>Devolução:</strong> 24/09/2026</p>
+                    </div>
+                </div>
+                <div class="status">
+                    <span>Em andamento</span>
+                    <p>14 dias</p>
+                </div>
+            </article>
+
+            <article class="aluguel-card">
+                <img src="imagens/livro3.webp" alt="Capa do livro O Pequeno Príncipe">
+                <div class="aluguel-info">
+                    <h2>O Pequeno Príncipe</h2>
+                    <p class="autor">Antoine de Saint-Exupéry</p>
+                    <div class="dados">
+                        <p><strong>Retirada:</strong> 01/08/2026</p>
+                        <p><strong>Devolução:</strong> 15/08/2026</p>
+                    </div>
+                </div>
+                <div class="status devolvido">
+                    <span>Devolvido</span>
+                    <p>No prazo</p>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

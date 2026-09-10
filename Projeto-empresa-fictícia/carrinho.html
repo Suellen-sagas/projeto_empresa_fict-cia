@@ -1,187 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Carrinho | BookSpace</title>
-
     <link rel="stylesheet" href="carrinho.css">
 </head>
-
 <body>
-
-    <!-- Cabeçalho -->
     <header class="header">
-
-        <div class="logo">
-            Book<span>Space</span>
-        </div>
-
+        <a href="livros.html" class="logo">Book<span>Space</span></a>
         <nav>
-            <a href="index.html">Início</a>
             <a href="livros.html">Livros</a>
-            <a href="carrinho.html" class="ativo">Carrinho</a>
+            <a href="alugueis.html">Meus aluguéis</a>
+            <a href="conta.html">Minha conta</a>
+            <a href="carrinho.html">Carrinho</a>
             <a href="index.html" class="sair">Sair</a>
         </nav>
-
     </header>
 
-
-    <!-- Conteúdo principal -->
     <main class="container">
-
-        <div class="titulo">
-
+        <section class="titulo">
             <h1>Meu carrinho</h1>
+            <p>Confira o livro antes de finalizar o aluguel.</p>
+        </section>
 
-            <p>
-                Confira os livros escolhidos antes de finalizar o pedido.
-            </p>
-
-        </div>
-
-
-        <div class="carrinho">
-
-            <!-- Itens -->
-            <section class="itens">
-
-                <!-- Livro 1 -->
-                <div class="item">
-
-                    <img
-                        src="img/livro1.jpg"
-                        alt="Capa do livro É Assim que Acaba"
-                    >
-
-                    <div class="item-info">
-
-                        <h2>
-                            É Assim que Acaba
-                        </h2>
-
-                        <p class="autor">
-                            Colleen Hoover
-                        </p>
-
-                        <p class="tipo">
-                            Compra
-                        </p>
-
-                        <strong>
-                            R$ 39,90
-                        </strong>
-
-                    </div>
-
-                    <button class="remover">
-                        Remover
-                    </button>
-
+        <section class="carrinho-area">
+            <article class="item-carrinho">
+                <img src="imagens/livro1.jpg" alt="Capa do livro É Assim que Acaba">
+                <div class="item-info">
+                    <h2>É Assim que Acaba</h2>
+                    <p>Colleen Hoover</p>
+                    <p><strong>Período:</strong> 14 dias</p>
+                    <a href="livros.html" class="remover">Remover</a>
                 </div>
+            </article>
 
-
-                <!-- Livro 2 -->
-                <div class="item">
-
-                    <img
-                        src="img/livro2.jpg"
-                        alt="Capa do livro O Hobbit"
-                    >
-
-                    <div class="item-info">
-
-                        <h2>
-                            O Hobbit
-                        </h2>
-
-                        <p class="autor">
-                            J. R. R. Tolkien
-                        </p>
-
-                        <p class="tipo">
-                            Aluguel - 15 dias
-                        </p>
-
-                        <strong>
-                            R$ 9,90
-                        </strong>
-
-                    </div>
-
-                    <button class="remover">
-                        Remover
-                    </button>
-
-                </div>
-
-            </section>
-
-
-            <!-- Resumo -->
             <aside class="resumo">
-
-                <h2>
-                    Resumo do pedido
-                </h2>
-
-                <div class="linha">
-
-                    <span>
-                        Livros
-                    </span>
-
-                    <strong>
-                        2
-                    </strong>
-
-                </div>
-
-                <div class="linha">
-
-                    <span>
-                        Subtotal
-                    </span>
-
-                    <strong>
-                        R$ 49,80
-                    </strong>
-
-                </div>
-
-                <div class="linha total">
-
-                    <span>
-                        Total
-                    </span>
-
-                    <strong>
-                        R$ 49,80
-                    </strong>
-
-                </div>
-
-
-                <button class="finalizar">
-                    Finalizar pedido
-                </button>
-
-
-                <a
-                    href="livros.html"
-                    class="continuar"
-                >
-                    Continuar comprando
-                </a>
-
+                <h2>Resumo</h2>
+                <p><span>Quantidade de livros</span><strong>1</strong></p>
+                <p><span>Prazo</span><strong>14 dias</strong></p>
+                <p><span>Valor</span><strong>Gratuito</strong></p>
+                <a href="alugueis.html" class="finalizar">Finalizar aluguel</a>
+                <a href="livros.html" class="continuar">Continuar escolhendo</a>
             </aside>
-
-        </div>
-
+        </section>
     </main>
-
 </body>
-
 </html>
