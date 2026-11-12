@@ -18,6 +18,12 @@ try {
       const response = await page.goto(base + item.route, { waitUntil: "domcontentloaded", timeout: 20000 });
       if (!response?.ok()) throw new Error("HTTP " + response?.status());
       await page.locator("main").first().waitFor({ timeout: 15000 });
+      if (!item.route) {
+        // O GitHub carrega a lista de arquivos dinamicamente.
+        await page.getByRole("link", { name: "backend", exact: true }).first()
+          .waitFor({ timeout: 12000 }).catch(() => {});
+      }
+      await page.waitForTimeout(1500);
       await page.pdf({
         path: path.resolve("artifacts", item.target),
         format: "A4",
