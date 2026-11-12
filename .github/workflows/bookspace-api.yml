@@ -4,11 +4,15 @@ on:
   push:
     paths:
       - 'backend/**'
+      - 'Projeto-empresa-fictícia/**'
       - '.github/workflows/bookspace-api.yml'
+      - 'README.md'
   pull_request:
     paths:
       - 'backend/**'
+      - 'Projeto-empresa-fictícia/**'
       - '.github/workflows/bookspace-api.yml'
+      - 'README.md'
 
 jobs:
   api:
@@ -23,5 +27,12 @@ jobs:
           node-version: '22'
       - name: Instalar dependencias
         run: npm install --no-audit --no-fund
+      - name: Verificar sintaxe do front-end
+        run: node --check '../Projeto-empresa-fictícia/script.js'
+      - name: Verificar sintaxe do back-end
+        run: |
+          node --check src/app.js
+          node --check src/store.js
+          node --check src/server.js
       - name: Rodar testes
         run: npm test
