@@ -34,5 +34,15 @@ jobs:
           node --check src/app.js
           node --check src/store.js
           node --check src/server.js
-      - name: Rodar testes
+      - name: Rodar testes da API
         run: npm test
+      - name: Instalar Chromium para teste da interface
+        run: npx playwright install --with-deps chromium
+      - name: Testar sistema integrado no navegador
+        run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bookspace-sistema-mobile
+          path: backend/artifacts/sistema-bookspace-mobile.png
+          if-no-files-found: ignore
