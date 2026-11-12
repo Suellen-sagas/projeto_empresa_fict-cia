@@ -40,9 +40,11 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Testar sistema integrado no navegador
         run: npm run test:browser
+      - name: Gerar evidencias do repositorio e dos commits
+        run: node test/github-evidence.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: bookspace-sistema-mobile
-          path: backend/artifacts/sistema-bookspace-mobile.png
+          name: bookspace-evidencias
+          path: backend/artifacts/*
           if-no-files-found: ignore
