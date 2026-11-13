@@ -1,6 +1,6 @@
 # BookSpace — API REST (Sprint 3)
 
-Back-end acadêmico em **Node.js + Express 5**, com cadastro/login, catálogo de livros e CRUD de aluguéis. Usa JSON em disco para persistência local, sem precisar instalar banco de dados.
+Back-end acadêmico em **Node.js + Express 5**, com cadastro/login, catálogo de livros e CRUD de aluguéis. Usa arquivo JSON no computador e **PostgreSQL (Supabase)** quando a variável segura `DATABASE_URL` é configurada no servidor.
 
 ## Como iniciar
 
@@ -13,10 +13,29 @@ npm install
 npm run dev
 ```
 
-4. Abra **http://localhost:3000/api/health** no navegador. A resposta deve ser `{"status":"ok","service":"BookSpace API"}`.
+4. Abra **http://localhost:3000/api/health** no navegador. A resposta contém `status: "ok"` e `database: "arquivo-local"` (ou `"postgresql"` quando o banco online está conectado).
 5. Para os testes automatizados, rode `npm test`.
 
-Por padrão, os dados são salvos em `backend/data/db.json` (gerado automaticamente e ignorado no Git). Os quatro livros do site já vêm cadastrados. `PORT`, `DB_FILE` e `CORS_ORIGINS` podem ser configurados como variáveis de ambiente (veja `.env.example`).
+Sem `DATABASE_URL`, os dados ficam em `backend/data/db.json` (criado automaticamente e ignorado no Git). Com `DATABASE_URL`, o servidor passa a salvar usuários, livros e aluguéis no PostgreSQL, sem modificar as rotas. Os quatro livros iniciais são criados automaticamente quando a base está vazia. Configure variáveis apenas no ambiente do servidor (veja `.env.example`).
+
+
+## Banco de dados permanente no Render + Supabase
+
+1. Em <https://supabase.com/dashboard>, crie um projeto gratuito (por exemplo, `bookspace`) e guarde a senha do banco **somente para você**.
+2. Abra o projeto no Supabase, clique em **Connect** e selecione **Session pooler** (porta **5432**, compatível com conexões IPv4). Copie a URL completa `postgresql://...` e substitua `[YOUR-PASSWORD]` pela senha do projeto. Se a senha tiver caracteres especiais como `@` ou `#`, codifique esses caracteres para URL.
+3. No Render, abra o serviço da API → **Environment → Add Environment Variable**. Use a chave **`DATABASE_URL`** e o valor dessa URL. **Nunca coloque a URL/senha no GitHub ou no Netlify.** Salve e faça redeploy.
+4. Abra **https://projeto-empresa-fict-cia.onrender.com/api/health**. A resposta deve conter `"status":"ok"` e `"database":"postgresql"`. Isso confirma leitura do banco de dados.
+5. Faça um cadastro novo no site e teste o login. Contas anteriores guardadas no arquivo local/temporário **não são migradas automaticamente**.
+
+O servidor cria automaticamente a estrutura `bookspace_private.state` no PostgreSQL, numa área privada não exposta pela API REST do Supabase. O estado é salvo em coluna JSONB com transações e bloqueio de linha, preservando as regras existentes da API e evitando conflitos entre dois aluguéis simultâneos. Para consultar usuários **somente no SQL Editor do Supabase**, sem revelar senhas:
+
+```sql
+SELECT usuario->>'name' AS nome, usuario->>'email' AS email
+FROM bookspace_private.state,
+LATERAL jsonb_array_elements(data->'users') AS usuario;
+```
+
+O servidor mantém tokens de sessão em memória, então após uma reinicialização será necessário fazer login novamente. Dados do PostgreSQL permanecem armazenados. Nunca compartilhe a variável `DATABASE_URL` ou os hashes das senhas.
 
 ## Rotas
 
@@ -74,7 +93,7 @@ Alternativamente, `{ "bookId": 1 }`. Guarde o `id` do aluguel retornado.
 
 ## Como integrar ao front-end
 
-O site atual (pasta `Projeto-empresa-fictícia`) usa `localStorage`, então **ainda não está conectado à API**. Na Sprint 3, substituir essa persistência por chamadas `fetch` aos endpoints acima:
+O site (pasta `Projeto-empresa-fictícia`) já está integrado à API REST usando `fetch` nos endpoints abaixo:
 
 - login/cadastro: `/api/auth/login` e `/api/auth/cadastro`
 - catálogo e detalhes: `/api/livros` e `/api/livros/:id`
@@ -86,4 +105,4 @@ Abra o front-end com **Live Server** na porta 5500, enquanto a API estiver rodan
 
 ## Observações importantes
 
-Este é um back-end **didático, para execução local e apresentação**, não um sistema pronto para produção. As senhas recebem hash com `scrypt`; usuários só acessam seus próprios aluguéis; o servidor impede alugar um livro indisponível. As sessões ficam em memória, portanto é preciso fazer login novamente após reiniciar o servidor. O arquivo JSON é adequado ao protótipo local, mas em produção seria necessário banco de dados, autenticação persistente segura e infraestrutura apropriada.
+Este é um back-end **didático, para execução local e apresentação**, não um sistema pronto para produção. As senhas recebem hash com `scrypt`; usuários só acessam seus próprios aluguéis; o servidor impede alugar um livro indisponível. As sessões ficam em memória, portanto é preciso fazer login novamente após reiniciar o servidor. O arquivo JSON é adequado ao protótipo local. Para demonstrar online, use PostgreSQL com `DATABASE_URL`; para uma aplicação comercial, ainda seriam necessárias autenticação/sessões persistentes, backups e infraestrutura apropriada.
