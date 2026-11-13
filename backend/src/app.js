@@ -99,7 +99,17 @@ export function createApp({ dbFile = process.env.DB_FILE || path.resolve('data/d
     } catch (error) { next(error); }
   }
 
-  app.get('/api/health', (_req, res) => res.json({ status: 'ok', service: 'BookSpace API' }));
+  app.get('/api/health', async (_req, res, next) => {
+    try {
+      // Verifica a leitura real do armazenamento, nao apenas se o servidor esta de pe.
+      await store.read(() => null);
+      res.json({
+        status: 'ok',
+        service: 'BookSpace API',
+        database: process.env.DATABASE_URL ? 'postgresql' : 'arquivo-local'
+      });
+    } catch (error) { next(error); }
+  });
 
   app.post('/api/auth/cadastro', async (req, res) => {
     const profile = validateProfile(req.body);
