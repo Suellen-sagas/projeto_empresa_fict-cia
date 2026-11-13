@@ -1,6 +1,7 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
+import pg from 'pg';
 
 const INITIAL_BOOKS = [
   {
@@ -51,7 +52,78 @@ const INITIAL_BOOKS = [
 
 const createInitialDatabase = () => ({ users: [], books: INITIAL_BOOKS, rentals: [] });
 
+// PostgreSQL (Supabase): guarda o estado em JSONB para manter a mesma API e
+// o mesmo comportamento transacional do prototipo local, sem arquivos efemeros.
+function createPostgresStore(connectionString) {
+  const { Pool } = pg;
+  const pool = new Pool({
+    connectionString,
+    ssl: { rejectUnauthorized: true },
+    max: 2,
+    connectionTimeoutMillis: 10000,
+    idleTimeoutMillis: 30000
+  });
+  let initialization;
+
+  async function initialize() {
+    if (!initialization) {
+      initialization = (async () => {
+        const client = await pool.connect();
+        try {
+          await client.query('CREATE SCHEMA IF NOT EXISTS bookspace_private');
+          await client.query(`CREATE TABLE IF NOT EXISTS bookspace_private.state (
+            id SMALLINT PRIMARY KEY CHECK (id = 1),
+            data JSONB NOT NULL
+          )`);
+          await client.query(`INSERT INTO bookspace_private.state (id, data)
+            VALUES (1, $1::jsonb) ON CONFLICT (id) DO NOTHING`,
+          [JSON.stringify(createInitialDatabase())]);
+        } finally {
+          client.release();
+        }
+      })().catch((error) => {
+        initialization = null; // permite tentar novamente apos falha de rede
+        throw error;
+      });
+    }
+    await initialization;
+  }
+
+  async function read(reader) {
+    await initialize();
+    const response = await pool.query('SELECT data FROM bookspace_private.state WHERE id = 1');
+    if (!response.rows.length) throw new Error('Banco de dados BookSpace nao inicializado.');
+    return reader(response.rows[0].data);
+  }
+
+  async function change(mutator) {
+    await initialize();
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+      const response = await client.query('SELECT data FROM bookspace_private.state WHERE id = 1 FOR UPDATE');
+      if (!response.rows.length) throw new Error('Banco de dados BookSpace nao inicializado.');
+      const db = response.rows[0].data;
+      const { result, changed = false } = await mutator(db);
+      if (changed) {
+        await client.query('UPDATE bookspace_private.state SET data = $1::jsonb WHERE id = 1',
+          [JSON.stringify(db)]);
+      }
+      await client.query('COMMIT');
+      return result;
+    } catch (error) {
+      await client.query('ROLLBACK').catch(() => {});
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
+
+  return { read, change };
+}
+
 export function createStore(file) {
+  if (process.env.DATABASE_URL) return createPostgresStore(process.env.DATABASE_URL);
   const filename = path.resolve(file);
   let queue = Promise.resolve();
 
