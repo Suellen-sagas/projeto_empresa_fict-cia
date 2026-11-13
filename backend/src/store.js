@@ -1,4 +1,5 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import pg from 'pg';
@@ -56,9 +57,18 @@ const createInitialDatabase = () => ({ users: [], books: INITIAL_BOOKS, rentals:
 // o mesmo comportamento transacional do prototipo local, sem arquivos efemeros.
 function createPostgresStore(connectionString) {
   const { Pool } = pg;
+  // O pooler Supabase usa a CA privada Supabase Root 2021.
+  // Confiamos somente nesta CA publica, preservando verificacao de certificado/host.
+  const ca = readFileSync(new URL('../certs/supabase-prod-ca-2021.crt', import.meta.url), 'utf8');
+  // node-postgres permite que sslmode da URL substitua o objeto ssl.
+  // Removemos os parametros SSL da URL para garantir a verificacao com a CA fornecida.
+  const connection = new URL(connectionString);
+  for (const key of ['sslmode', 'sslrootcert', 'sslcert', 'sslkey']) {
+    connection.searchParams.delete(key);
+  }
   const pool = new Pool({
-    connectionString,
-    ssl: { rejectUnauthorized: true },
+    connectionString: connection.toString(),
+    ssl: { ca, rejectUnauthorized: true },
     max: 2,
     connectionTimeoutMillis: 10000,
     idleTimeoutMillis: 30000
